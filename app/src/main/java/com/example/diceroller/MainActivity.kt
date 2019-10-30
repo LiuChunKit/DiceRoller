@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.text.isDigitsOnly
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -15,50 +17,64 @@ class MainActivity : AppCompatActivity() {
         val rollButton: Button = findViewById(R.id.roll_button)
         rollButton.setOnClickListener { rollDice() }
 
-        val countButton: Button = findViewById(R.id.randomNumber_button)
-        countButton.setOnClickListener { randomNumber() }
+        val countButton: Button = findViewById(R.id.countUp_button)
+        countButton.setOnClickListener { countUp() }
+
+        val resetButton: Button = findViewById(R.id.reset_button)
+        resetButton.setOnClickListener{resetBtn()}
+
+
     }
 
     private fun rollDice() {
-        val randomInt = Random().nextInt(6) + 1
-        val randomInt = Random().nextInt(6) + 1
-        val randomInt = Random().nextInt(6) + 1
+        val randomInt = Random.nextInt(6) + 1
+        val randomInt2 = Random.nextInt(6) + 1
+        val randomInt3 = Random.nextInt(6) + 1
 
-        val resultText: TextView = findViewById(R.id.result_text)
-        val resultText2: TextView = findViewById(R.id.result_text2)
-        val resultText3: TextView = findViewById(R.id.result_text3)
+        val resultText: TextView = findViewById(R.id.resultText)
+        val resultText2: TextView = findViewById(R.id.resultText2)
+        val resultText3: TextView = findViewById(R.id.resultText3)
+
         resultText.text = randomInt.toString()
         resultText2.text = randomInt2.toString()
         resultText3.text = randomInt3.toString()
     }
 
-    private fun randomNumber() {
-        val resultText: TextView = findViewById(R.id.result_text)
-        val resultText2: TextView = findViewById(R.id.result_text2)
-        val resultText3: TextView = findViewById(R.id.result_text3)
+    private fun countUp() {
 
-        if (resultText.text == "Hello World!" || resultText2.text == "Hello World!" || resultText3.text == "Hello World!") {
-            resultText.text = "1"
-            resultText2.text = "1"
-            resultText3.text = "1"
-        } else {
+        val resultText: TextView = findViewById(R.id.resultText)
+        val resultText2: TextView = findViewById(R.id.resultText2)
+        val resultText3: TextView = findViewById(R.id.resultText3)
 
-            var resultInt = resultText.text.toString().toInt()
-            var resultInt2 = resultText2.text.toString().toInt()
-            var resultInt3 = resultText3.text.toString().toInt()
+        val resultArr = arrayOf(resultText, resultText2, resultText3)
 
-            if (resultInt < 6 || resultInt2 < 6 || resultInt3 < 6) {
-                resultInt++
-                resultInt2++
-                resultInt3++
-
-                resultText.text = resultInt.toString()
-                resultText2.text = resultInt2.toString()
-                resultText3.text = resultInt3.toString()
-
+        for(chkResultArr in resultArr){
+            if(chkResultArr.text.toString().toIntOrNull() == null){
+                chkResultArr.text = "1"
+            }
+            else{
+                val onScreenResult = chkResultArr.text.toString().toInt()
+                if(onScreenResult < 6){
+                    chkResultArr.text = (onScreenResult + 1).toString()
+                }
+                else{
+                    chkResultArr.text = onScreenResult.toString()
+                }
             }
         }
+    }
+
+    private fun resetBtn(){
+
+        val resultText: TextView = findViewById(R.id.resultText)
+        val resultText2: TextView = findViewById(R.id.resultText2)
+        val resultText3: TextView = findViewById(R.id.resultText3)
+
+        resultText.text = "0"
+        resultText2.text = "0"
+        resultText3.text = "0"
 
     }
+}
 
 

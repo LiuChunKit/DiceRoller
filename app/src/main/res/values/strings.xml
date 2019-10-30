@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">DiceRoller</string>
     <string name="roll_label">Roll</string>
-    <string name="randomNumber_label">Random Dice Number</string>
+    <string name="countUp_label">Count Up</string>
+    <string name="resetBtn_label">Reset </string>
 </resources>
